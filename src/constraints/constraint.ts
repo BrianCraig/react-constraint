@@ -1,5 +1,4 @@
-import { LayoutInstance } from "./generator";
-import { Side, ConstraintSize, ConstraintInstance } from "./definition";
+import { ConstraintInstance, ConstraintInstances } from "./definition";
 
 export const ResolveConstraint = (constraint: ConstraintInstance): void => {
   const {
@@ -15,5 +14,14 @@ export const ResolveConstraint = (constraint: ConstraintInstance): void => {
   if (instancePosition !== undefined) {
     fromInstance.positions[fromSide] = instancePosition + distance;
     constraint.resolved = Boolean(true);
+  }
+};
+
+export const isConstraintResolved = (constraint: ConstraintInstance): Boolean =>
+  constraint.resolved;
+
+export const ResolveConstraints = (constraints: ConstraintInstances): void => {
+  while (!constraints.every(isConstraintResolved)) {
+    constraints.forEach(ResolveConstraint);
   }
 };

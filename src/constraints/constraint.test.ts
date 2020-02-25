@@ -1,4 +1,4 @@
-import { ResolveConstraint } from "./constraint";
+import { ResolveConstraint, ResolveConstraints } from "./constraint";
 import { ComponentInstance, Side, ConstraintInstance } from "./definition";
 
 const ParentComponent = (): ComponentInstance => ({
@@ -80,10 +80,12 @@ describe("constraint resolving tests", () => {
       distance: 10
     };
 
-    ResolveConstraint(constraintTop);
-    ResolveConstraint(constraintRight);
-    ResolveConstraint(constraintBottom);
-    ResolveConstraint(constraintLeft);
+    ResolveConstraints([
+      constraintTop,
+      constraintRight,
+      constraintBottom,
+      constraintLeft
+    ]);
 
     expect(testedComponent.positions).toStrictEqual({
       [Side.top]: 10,

@@ -1,4 +1,4 @@
-import { LayoutDefinition, Side } from "./definition";
+import { LayoutDefinition } from "./definition";
 
 export const simpleBlock: LayoutDefinition = {
   Block: {
