@@ -11,4 +11,9 @@ export const ResolveConstraint = (constraint: ConstraintInstance): void => {
     resolved
   } = constraint;
   if (resolved) return;
+  const instancePosition = toInstance.positions[toSide];
+  if (instancePosition !== undefined) {
+    fromInstance.positions[fromSide] = instancePosition + distance;
+    constraint.resolved = Boolean(true);
+  }
 };
