@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { simpleBlock } from "./constraints/example";
+import { createLayoutComponent } from "./constraints/generator";
+
+const codeStyle: React.CSSProperties = {
+  width: "50vw",
+  height: "100vh",
+  padding: "10px",
+  boxSizing: "border-box",
+  position: "absolute",
+  whiteSpace: "pre-wrap"
+};
+
+const viewStyle: React.CSSProperties = {
+  width: "50vw",
+  height: "100vh",
+  padding: "10px",
+  boxSizing: "border-box",
+  position: "absolute",
+  left: "50%"
+};
+
+const Comp = createLayoutComponent(simpleBlock);
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div style={codeStyle} contentEditable>
+        {JSON.stringify(simpleBlock, null, 2)}
+      </div>
+      <div style={viewStyle}>
+        <Comp width={400} height={400} Block={<p>Hola</p>} />
+      </div>
+    </>
   );
-}
+};
 
 export default App;
