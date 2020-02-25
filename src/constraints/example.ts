@@ -1,6 +1,6 @@
-import { ConstraintLayout } from "./definition";
+import { LayoutDefinition, Side } from "./definition";
 
-export const simpleBlock: ConstraintLayout = {
+export const simpleBlock: LayoutDefinition = {
   Block: {
     constraints: [
       {
@@ -11,12 +11,12 @@ export const simpleBlock: ConstraintLayout = {
       {
         component: "parent",
         side: "right",
-        distance: 32
+        distance: -32
       },
       {
         component: "parent",
         side: "bottom",
-        distance: 32
+        distance: -32
       },
       {
         component: "parent",

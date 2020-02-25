@@ -1,5 +1,5 @@
 import React from "react";
-import { ConstraintLayout, ConstraintComponent } from "./definition";
+import { LayoutDefinition, ComponentDefinition, Side } from "./definition";
 
 export interface LayoutComponent {
   width: number;
@@ -7,23 +7,16 @@ export interface LayoutComponent {
   [key: string]: React.ReactNode;
 }
 
-enum Side {
-  top = "top",
-  right = "right",
-  bottom = "bottom",
-  left = "left"
-}
-
-class LayoutInstance {
+export class LayoutInstance {
   private layoutInstanceList: LayoutInstance[];
   private name: string;
-  private constraint: ConstraintComponent;
+  private constraint: ComponentDefinition;
   private resolvedPositions: { [key in Side]?: number } = {};
 
   constructor(
     layoutInstanceList: LayoutInstance[],
     name: string,
-    constraint: ConstraintComponent
+    constraint: ComponentDefinition
   ) {
     this.layoutInstanceList = layoutInstanceList;
     this.name = name;
@@ -51,7 +44,7 @@ class LayoutInstance {
 }
 
 export const createLayoutComponent = (
-  options: ConstraintLayout
+  options: LayoutDefinition
 ): React.FunctionComponent<LayoutComponent> => ({
   width,
   height,

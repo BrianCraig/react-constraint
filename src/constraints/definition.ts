@@ -1,19 +1,42 @@
 export type ConstraintSize = number;
 
-export type ConstraintSide = "top" | "right" | "bottom" | "left";
+export enum Side {
+  top = "top",
+  right = "right",
+  bottom = "bottom",
+  left = "left"
+}
 
 export interface ConstraintDefinition {
   component: string;
-  side: ConstraintSide;
+  side: keyof typeof Side;
   distance: ConstraintSize;
 }
 
-export interface ConstraintComponent {
+export interface ComponentDefinition {
   constraints: ConstraintDefinition[];
   width?: ConstraintSize;
   height?: ConstraintSize;
 }
 
-export interface ConstraintLayout {
-  [key: string]: ConstraintComponent;
+export interface LayoutDefinition {
+  [key: string]: ComponentDefinition;
 }
+
+export interface ComponentInstance {
+  name: string;
+  positions: { [key in Side]?: number };
+}
+
+export type ComponentInstances = ComponentInstance[];
+
+export interface ConstraintInstance {
+  fromInstance: ComponentInstance;
+  fromSide: Side;
+  toInstance: ComponentInstance;
+  toSide: Side;
+  distance: ConstraintSize;
+  resolved: Boolean;
+}
+
+export type ConstraintInstances = ConstraintInstance[];
