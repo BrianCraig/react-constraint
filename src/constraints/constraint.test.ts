@@ -46,4 +46,50 @@ describe("constraint resolving tests", () => {
     expect(constraint.resolved).toBe(Boolean(true));
     expect(testedComponent.positions[Side.top]).toBe(10);
   });
+
+  test("a full constrainted Component", () => {
+    const testedComponent = NewComponent("nameX");
+    const parent = ParentComponent();
+    const constraintTop: ConstraintInstance = {
+      fromInstance: testedComponent,
+      fromSide: Side.top,
+      toInstance: parent,
+      toSide: Side.top,
+      resolved: Boolean(false),
+      distance: 10
+    };
+
+    const constraintRight = {
+      ...constraintTop,
+      fromSide: Side.right,
+      toSide: Side.right,
+      distance: -10
+    };
+
+    const constraintBottom = {
+      ...constraintTop,
+      fromSide: Side.bottom,
+      toSide: Side.bottom,
+      distance: -10
+    };
+
+    const constraintLeft = {
+      ...constraintTop,
+      fromSide: Side.left,
+      toSide: Side.left,
+      distance: 10
+    };
+
+    ResolveConstraint(constraintTop);
+    ResolveConstraint(constraintRight);
+    ResolveConstraint(constraintBottom);
+    ResolveConstraint(constraintLeft);
+
+    expect(testedComponent.positions).toStrictEqual({
+      [Side.top]: 10,
+      [Side.right]: 90,
+      [Side.bottom]: 90,
+      [Side.left]: 10
+    });
+  });
 });
