@@ -9,7 +9,8 @@ export enum Side {
 
 export interface ConstraintDefinition {
   component: string;
-  side: keyof typeof Side;
+  fromSide: keyof typeof Side;
+  toSide: keyof typeof Side;
   distance: ConstraintSize;
 }
 

@@ -5,22 +5,26 @@ export const simpleBlock: LayoutDefinition = {
     constraints: [
       {
         component: "parent",
-        side: "top",
+        fromSide: "top",
+        toSide: "top",
         distance: 32
       },
       {
         component: "parent",
-        side: "right",
+        fromSide: "right",
+        toSide: "right",
         distance: -32
       },
       {
         component: "parent",
-        side: "bottom",
+        fromSide: "bottom",
+        toSide: "bottom",
         distance: -32
       },
       {
         component: "parent",
-        side: "left",
+        fromSide: "left",
+        toSide: "left",
         distance: 32
       }
     ]
