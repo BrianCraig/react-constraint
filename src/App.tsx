@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import { simpleBlock } from "./constraints/example";
 import { createLayoutComponent } from "./constraints/generator";
+import { vertices } from "./examples/vertices";
 
 const codeStyle: React.CSSProperties = {
   width: "50vw",
@@ -21,13 +21,13 @@ const viewStyle: React.CSSProperties = {
   left: "50%"
 };
 
-const Comp = createLayoutComponent(simpleBlock);
+const Comp = createLayoutComponent(vertices);
 
 const App: React.FC = () => {
   return (
     <>
       <div style={codeStyle} contentEditable>
-        {JSON.stringify(simpleBlock, null, 2)}
+        {JSON.stringify(vertices, null, 2)}
       </div>
       <div style={viewStyle}>
         <Comp width={400} height={400} Block={<p>Hola</p>} />
