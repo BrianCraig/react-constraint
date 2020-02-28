@@ -1,6 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
+import { createLayoutComponent } from "./constraints/generator";
+import { vertices } from "./examples/vertices";
+
+const Comp = createLayoutComponent(vertices);
 
 const F = "";
 
@@ -18,7 +22,13 @@ const useStyles = makeStyles({
     padding: 16,
     background: "#ffffff",
     height: "calc(100vh - 32px)",
-    borderRight: "1px solid #00000030"
+    borderRight: "1px solid #00000030",
+    position: "absolute"
+  },
+  centerBlock: {
+    position: "absolute",
+    left: 300,
+    top: 16
   },
   titleBox: {
     height: 32,
@@ -79,6 +89,9 @@ export const Layout: React.FC = () => {
             SuperLargeTextXDXDXDXDXDXDXDXXDXDXD
           </Typography>
         </div>
+      </div>
+      <div className={classes.centerBlock}>
+        <Comp width={400} height={400} />
       </div>
     </div>
   );

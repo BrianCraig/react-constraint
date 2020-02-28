@@ -9,19 +9,32 @@ export interface LayoutComponent {
   [key: string]: React.ReactNode;
 }
 
-const ComponentToNode = ({ positions, name }: ComponentInstance) => (
-  <div
-    style={{
-      position: "absolute",
-      top: positions[Side.top],
-      left: positions[Side.left],
-      background: "#00000022",
-      width: (positions[Side.right] || 0) - (positions[Side.left] || 0),
-      height: (positions[Side.bottom] || 0) - (positions[Side.top] || 0)
-    }}
-    children={name}
-  ></div>
-);
+const ComponentToNode = ({ positions, name }: ComponentInstance) => {
+  const width = (positions[Side.right] || 0) - (positions[Side.left] || 0);
+  const height = (positions[Side.bottom] || 0) - (positions[Side.top] || 0);
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: positions[Side.top],
+        left: positions[Side.left],
+        background: "#00000022",
+        width: width,
+        height: height,
+        border: "1px solid #000",
+        boxSizing: "border-box",
+        fontSize: 12
+      }}
+      children={
+        <>
+          {`${name}`}
+          <br />
+          {`${width} * ${height}`}
+        </>
+      }
+    ></div>
+  );
+};
 
 export const createLayoutComponent = (
   options: LayoutDefinition
