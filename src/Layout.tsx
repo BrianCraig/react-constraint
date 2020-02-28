@@ -1,9 +1,15 @@
-import React, { useContext, FunctionComponent } from "react";
+import React, {
+  useContext,
+  FunctionComponent,
+  ReactElement,
+  ReactNode
+} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
-import { createLayoutComponent } from "./constraints/generator";
+import { createLayoutComponent, DebugElement } from "./constraints/generator";
 import { vertices } from "./examples/vertices";
 import { LayoutContext, LayoutProvider } from "./LayoutContext";
+import { width } from "@material-ui/system";
 
 const F = "";
 
@@ -88,7 +94,20 @@ const ComponentList: FunctionComponent<{ box: string; item: string }> = ({
 const ComponentView = () => {
   const { layout, addComponent } = useContext(LayoutContext);
   const Comp = createLayoutComponent(layout);
-  return <Comp width={400} height={400} />;
+  const props: { [key: string]: ReactNode } = {};
+  Object.keys(layout).forEach(name => {
+    props[name] = (
+      <DebugElement style={{ width: 0, height: 0, top: 0, left: 0 }} />
+    );
+  });
+  return (
+    <Comp
+      width={400}
+      height={400}
+      parent={<DebugElement style={{ width: 0, height: 0, top: 0, left: 0 }} />}
+      {...props}
+    />
+  );
 };
 
 export const Layout: React.FC = () => {
