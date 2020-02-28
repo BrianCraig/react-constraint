@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { createLayoutComponent } from "./constraints/generator";
 import { vertices } from "./examples/vertices";
+import { Layout } from "./Layout";
 
 const codeStyle: React.CSSProperties = {
   width: "50vw",
@@ -26,9 +27,6 @@ const Comp = createLayoutComponent(vertices);
 const App: React.FC = () => {
   return (
     <>
-      <div style={codeStyle} contentEditable>
-        {JSON.stringify(vertices, null, 2)}
-      </div>
       <div style={viewStyle}>
         <Comp width={400} height={400} Block={<p>Hola</p>} />
       </div>
@@ -36,4 +34,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default Layout;
