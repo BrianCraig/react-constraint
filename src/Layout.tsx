@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useContext, FunctionComponent } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import { createLayoutComponent } from "./constraints/generator";
 import { vertices } from "./examples/vertices";
-
-const Comp = createLayoutComponent(vertices);
+import { LayoutContext, LayoutProvider } from "./LayoutContext";
 
 const F = "";
 
@@ -56,43 +55,62 @@ const useStyles = makeStyles({
   }
 });
 
+const ComponentList: FunctionComponent<{ box: string; item: string }> = ({
+  box,
+  item
+}) => {
+  const { layout, addComponent } = useContext(LayoutContext);
+
+  return (
+    <>
+      {Object.keys(layout).map(name => (
+        <div className={box}>
+          <Typography component="h1" className={item}>
+            {name}
+          </Typography>
+        </div>
+      ))}
+      <Typography
+        onClick={() =>
+          addComponent(
+            [...Array(10)]
+              .map(i => (~~(Math.random() * 36)).toString(36))
+              .join("")
+          )
+        }
+      >
+        Add component
+      </Typography>
+    </>
+  );
+};
+
+const ComponentView = () => {
+  const { layout, addComponent } = useContext(LayoutContext);
+  const Comp = createLayoutComponent(layout);
+  return <Comp width={400} height={400} />;
+};
+
 export const Layout: React.FC = () => {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <div className={classes.leftBlock}>
-        <div className={classes.titleBox}>
-          <Typography component="h1" className={classes.title}>
-            Components
-          </Typography>
+    <LayoutProvider>
+      <div className={classes.root}>
+        <div className={classes.leftBlock}>
+          <div className={classes.titleBox}>
+            <Typography component="h1" className={classes.title}>
+              Components
+            </Typography>
+          </div>
+          <ComponentList
+            box={classes.componentNameBox}
+            item={classes.componentName}
+          />
         </div>
-        <div className={classes.componentNameBox}>
-          <Typography component="h1" className={classes.componentName}>
-            HeaderXStyleB
-          </Typography>
-        </div>
-        <div className={classes.componentNameBox}>
-          <Typography component="h1" className={classes.componentName}>
-            HeaderXStyleBasd
-          </Typography>
-        </div>
-        <div className={classes.componentNameBox}>
-          <Typography
-            component="h1"
-            className={`${classes.componentName} ${classes.bold}`}
-          >
-            AJGS
-          </Typography>
-        </div>
-        <div className={classes.componentNameBox}>
-          <Typography component="h1" className={classes.componentName}>
-            SuperLargeTextXDXDXDXDXDXDXDXXDXDXD
-          </Typography>
+        <div className={classes.centerBlock}>
+          <ComponentView />
         </div>
       </div>
-      <div className={classes.centerBlock}>
-        <Comp width={400} height={400} />
-      </div>
-    </div>
+    </LayoutProvider>
   );
 };
