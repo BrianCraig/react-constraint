@@ -1,5 +1,7 @@
 import React, { FunctionComponent, useContext } from "react";
 import { LayoutContext } from "./LayoutContext";
+import { DebugBorders } from "./DebugBorders";
+import { positions } from "@material-ui/system";
 
 interface DebugElementInterface {
   style?: { width: number; height: number; top: number; left: number };
@@ -18,12 +20,11 @@ export const DebugElement: FunctionComponent<DebugElementInterface> = ({
     <div
       style={{
         position: "absolute",
-        background: selected ? "blue" : "#00000022",
+        background: selected ? "#00000040" : "#00000022",
         width,
         height,
         top,
         left,
-        border: "1px solid #000",
         boxSizing: "border-box",
         fontSize: 12
       }}
@@ -33,6 +34,14 @@ export const DebugElement: FunctionComponent<DebugElementInterface> = ({
           {name ? name : "pass name to debug"}
           <br />
           {`${width} * ${height}`}
+          {selected && (
+            <div style={{ position: "absolute", top: -4, left: -4 }}>
+              <DebugBorders
+                width={width ? width : 100}
+                height={height ? height : 100}
+              />
+            </div>
+          )}
         </>
       }
     ></div>
