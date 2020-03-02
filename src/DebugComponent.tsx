@@ -12,9 +12,12 @@ export const DebugElement: FunctionComponent<DebugElementInterface> = ({
   style: { width, height, top, left } = {},
   name = ""
 }) => {
-  const { setSelectedComponent, selectedComponent, layout } = useContext(
-    LayoutContext
-  );
+  const {
+    setSelectedComponent,
+    selectedComponent,
+    layout,
+    setEditConstraint
+  } = useContext(LayoutContext);
   const selected = selectedComponent === name;
   return (
     <div
@@ -39,6 +42,10 @@ export const DebugElement: FunctionComponent<DebugElementInterface> = ({
               <DebugBorders
                 width={width ? width : 100}
                 height={height ? height : 100}
+                onTop={() => setEditConstraint("top")}
+                onRight={() => setEditConstraint("right")}
+                onBottom={() => setEditConstraint("bottom")}
+                onLeft={() => setEditConstraint("left")}
               />
             </div>
           )}

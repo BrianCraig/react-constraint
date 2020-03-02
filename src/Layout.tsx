@@ -4,6 +4,7 @@ import { Typography } from "@material-ui/core";
 import { createLayoutComponent } from "./constraints/generator";
 import { LayoutContext, LayoutProvider } from "./LayoutContext";
 import { DebugElement } from "./DebugComponent";
+import { EditConstraint } from "./EditConstraint";
 
 const F = "";
 
@@ -106,6 +107,7 @@ export const Layout: React.FC = () => {
   const classes = useStyles();
   return (
     <LayoutProvider>
+      <EditConstraint />
       <div className={classes.root}>
         <div className={classes.leftBlock}>
           <div className={classes.titleBox}>

@@ -14,8 +14,11 @@ import {
 export interface LayoutContextInterface {
   layout: LayoutDefinition;
   addComponent: (name: string) => void;
+  changeConstraint: (constraint: ConstraintDefinition) => void;
   selectedComponent: string;
   setSelectedComponent: Dispatch<SetStateAction<string>>;
+  editConstraint: string;
+  setEditConstraint: Dispatch<SetStateAction<string>>;
 }
 
 export const LayoutContext: Context<LayoutContextInterface> = createContext(
@@ -52,14 +55,41 @@ const defaultConstraints: ConstraintDefinition[] = [
 export const LayoutProvider: FunctionComponent = ({ children }) => {
   const [layout, setLayout] = useState<LayoutDefinition>({});
   const [selectedComponent, setSelectedComponent] = useState<string>("");
+  const [editConstraint, setEditConstraint] = useState<string>("");
   const addComponent = (name: string) =>
     setLayout(props => ({
       ...props,
       [name]: { constraints: defaultConstraints }
     }));
+  const changeConstraint = (constraint: ConstraintDefinition) =>
+    setLayout(layout => {
+      const originalConstraints = layout[selectedComponent].constraints;
+      const constraints = [
+        ...originalConstraints.filter(
+          item => item.fromSide !== constraint.fromSide
+        ),
+        constraint
+      ];
+      return {
+        ...layout,
+        [selectedComponent]: {
+          ...layout[selectedComponent],
+          constraints
+        }
+      };
+    });
+
   return (
     <LayoutContext.Provider
-      value={{ layout, addComponent, selectedComponent, setSelectedComponent }}
+      value={{
+        layout,
+        addComponent,
+        changeConstraint,
+        selectedComponent,
+        setSelectedComponent,
+        editConstraint,
+        setEditConstraint
+      }}
       children={children}
     />
   );
