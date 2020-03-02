@@ -10,37 +10,6 @@ export interface LayoutComponent {
   [key: string]: React.ReactNode;
 }
 
-interface DebugElementInterface {
-  style: { width: number; height: number; top: number; left: number };
-}
-
-export const DebugElement: FunctionComponent<DebugElementInterface> = ({
-  style: { width, height, top, left }
-}) => {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        background: "#00000022",
-        width,
-        height,
-        top,
-        left,
-        border: "1px solid #000",
-        boxSizing: "border-box",
-        fontSize: 12
-      }}
-      children={
-        <>
-          {`PASS NAME TO DEBUG`}
-          <br />
-          {`${width} * ${height}`}
-        </>
-      }
-    ></div>
-  );
-};
-
 export const createLayoutComponent = (
   options: LayoutDefinition
 ): React.FunctionComponent<LayoutComponent> => ({

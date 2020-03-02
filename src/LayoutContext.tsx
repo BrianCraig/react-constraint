@@ -2,7 +2,9 @@ import React, {
   createContext,
   FunctionComponent,
   Context,
-  useState
+  useState,
+  Dispatch,
+  SetStateAction
 } from "react";
 import {
   LayoutDefinition,
@@ -12,12 +14,13 @@ import {
 export interface LayoutContextInterface {
   layout: LayoutDefinition;
   addComponent: (name: string) => void;
+  selectedComponent: string;
+  setSelectedComponent: Dispatch<SetStateAction<string>>;
 }
 
-export const LayoutContext: Context<LayoutContextInterface> = createContext({
-  layout: {},
-  addComponent: name => {}
-});
+export const LayoutContext: Context<LayoutContextInterface> = createContext(
+  null as any
+);
 
 const defaultConstraints: ConstraintDefinition[] = [
   {
@@ -48,6 +51,7 @@ const defaultConstraints: ConstraintDefinition[] = [
 
 export const LayoutProvider: FunctionComponent = ({ children }) => {
   const [layout, setLayout] = useState<LayoutDefinition>({});
+  const [selectedComponent, setSelectedComponent] = useState<string>("");
   const addComponent = (name: string) =>
     setLayout(props => ({
       ...props,
@@ -55,7 +59,7 @@ export const LayoutProvider: FunctionComponent = ({ children }) => {
     }));
   return (
     <LayoutContext.Provider
-      value={{ layout, addComponent }}
+      value={{ layout, addComponent, selectedComponent, setSelectedComponent }}
       children={children}
     />
   );

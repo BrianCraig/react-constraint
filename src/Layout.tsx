@@ -1,15 +1,9 @@
-import React, {
-  useContext,
-  FunctionComponent,
-  ReactElement,
-  ReactNode
-} from "react";
+import React, { useContext, FunctionComponent, ReactNode } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
-import { createLayoutComponent, DebugElement } from "./constraints/generator";
-import { vertices } from "./examples/vertices";
+import { createLayoutComponent } from "./constraints/generator";
 import { LayoutContext, LayoutProvider } from "./LayoutContext";
-import { width } from "@material-ui/system";
+import { DebugElement } from "./DebugComponent";
 
 const F = "";
 
@@ -92,19 +86,17 @@ const ComponentList: FunctionComponent<{ box: string; item: string }> = ({
 };
 
 const ComponentView = () => {
-  const { layout, addComponent } = useContext(LayoutContext);
+  const { layout } = useContext(LayoutContext);
   const Comp = createLayoutComponent(layout);
   const props: { [key: string]: ReactNode } = {};
   Object.keys(layout).forEach(name => {
-    props[name] = (
-      <DebugElement style={{ width: 0, height: 0, top: 0, left: 0 }} />
-    );
+    props[name] = <DebugElement name={name} />;
   });
   return (
     <Comp
       width={400}
       height={400}
-      parent={<DebugElement style={{ width: 0, height: 0, top: 0, left: 0 }} />}
+      parent={<DebugElement name={"parent"} />}
       {...props}
     />
   );
