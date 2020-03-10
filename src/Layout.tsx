@@ -58,17 +58,18 @@ const useStyles = makeStyles({
   }
 });
 
-const ComponentList: FunctionComponent<{ box: string; item: string }> = ({
+const ComponentList: FunctionComponent<{ box: string; item: string, selectedItem: string }> = ({
   box,
-  item
+  item,
+  selectedItem
 }) => {
-  const { layout, toggleAddingComponent } = useContext(LayoutContext);
+  const { layout, toggleAddingComponent, selectedComponent, setSelectedComponent } = useContext(LayoutContext);
 
   return (
     <>
       {Object.keys(layout).map(name => (
         <div className={box}>
-          <Typography component="h1" className={item}>
+          <Typography component="h1" className={selectedComponent === name ? selectedItem : item} onClick={() => setSelectedComponent(name)}>
             {name}
           </Typography>
         </div>
@@ -121,6 +122,7 @@ export const Layout: React.FC = () => {
           <ComponentList
             box={classes.componentNameBox}
             item={classes.componentName}
+            selectedItem={`${classes.componentName} ${classes.bold}`}
           />
         </div>
         <div className={classes.centerBlock}>
