@@ -33,8 +33,9 @@ export const createLayoutComponent = (
         height,
         top: positions[Side.top],
         left: positions[Side.left]
-      }
-    });
+      },
+      key: name
+     });
   };
 
   return <div>{componentsInstances.map(getComponent)}</div>;

@@ -68,7 +68,7 @@ const ComponentList: FunctionComponent<{ box: string; item: string, selectedItem
   return (
     <>
       {Object.keys(layout).map(name => (
-        <div className={box}>
+        <div className={box} key={name}>
           <Typography component="h1" className={selectedComponent === name ? selectedItem : item} onClick={() => setSelectedComponent(name)}>
             {name}
           </Typography>
