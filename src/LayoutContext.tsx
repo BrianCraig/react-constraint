@@ -11,9 +11,12 @@ import {
   ConstraintDefinition
 } from "./constraints/definition";
 
+
 export interface LayoutContextInterface {
   layout: LayoutDefinition;
   addComponent: (name: string) => void;
+  addingComponent: boolean;
+  toggleAddingComponent: () => void;
   changeConstraint: (constraint: ConstraintDefinition) => void;
   selectedComponent: string;
   setSelectedComponent: Dispatch<SetStateAction<string>>;
@@ -54,6 +57,7 @@ const defaultConstraints: ConstraintDefinition[] = [
 
 export const LayoutProvider: FunctionComponent = ({ children }) => {
   const [layout, setLayout] = useState<LayoutDefinition>({});
+  const [addingComponent, setAddingComponent] = useState<boolean>(false)
   const [selectedComponent, setSelectedComponent] = useState<string>("");
   const [editConstraint, setEditConstraint] = useState<string>("");
   const addComponent = (name: string) =>
@@ -84,6 +88,8 @@ export const LayoutProvider: FunctionComponent = ({ children }) => {
       value={{
         layout,
         addComponent,
+        addingComponent,
+        toggleAddingComponent: () => setAddingComponent(!addingComponent),
         changeConstraint,
         selectedComponent,
         setSelectedComponent,

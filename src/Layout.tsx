@@ -6,6 +6,7 @@ import { createLayoutComponent } from "./constraints/generator";
 import { LayoutContext, LayoutProvider } from "./LayoutContext";
 import { DebugElement } from "./DebugComponent";
 import { EditConstraint } from "./EditConstraint";
+import { AddConstraint } from "./AddConstraint";
 
 const F = "";
 
@@ -61,7 +62,7 @@ const ComponentList: FunctionComponent<{ box: string; item: string }> = ({
   box,
   item
 }) => {
-  const { layout, addComponent } = useContext(LayoutContext);
+  const { layout, toggleAddingComponent } = useContext(LayoutContext);
 
   return (
     <>
@@ -73,13 +74,7 @@ const ComponentList: FunctionComponent<{ box: string; item: string }> = ({
         </div>
       ))}
       <Typography
-        onClick={() =>
-          addComponent(
-            [...Array(10)]
-              .map(i => (~~(Math.random() * 36)).toString(36))
-              .join("")
-          )
-        }
+        onClick={toggleAddingComponent}
       >
         Add component
       </Typography>
@@ -95,10 +90,10 @@ const ComponentView = () => {
   Object.keys(layout).forEach(name => {
     props[name] = <DebugElement name={name} />;
   });
-  
+
   return (
-    <ResizableBox  height={size.height} width={size.width} onResize={(event, { size, handle}) => {
-      setSize({width: size.width, height: size.height})
+    <ResizableBox height={size.height} width={size.width} onResize={(event, { size, handle }) => {
+      setSize({ width: size.width, height: size.height })
     }}>
       <Comp
         width={size.width}
@@ -115,6 +110,7 @@ export const Layout: React.FC = () => {
   return (
     <LayoutProvider>
       <EditConstraint />
+      <AddConstraint />
       <div className={classes.root}>
         <div className={classes.leftBlock}>
           <div className={classes.titleBox}>
