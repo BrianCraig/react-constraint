@@ -1,4 +1,5 @@
-import React, { useContext, FunctionComponent, ReactNode } from "react";
+import React, { useContext, FunctionComponent, ReactNode, useState } from "react";
+import { ResizableBox } from "react-resizable";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import { createLayoutComponent } from "./constraints/generator";
@@ -87,19 +88,25 @@ const ComponentList: FunctionComponent<{ box: string; item: string }> = ({
 };
 
 const ComponentView = () => {
+  const [size, setSize] = useState({ width: 400, height: 400 })
   const { layout } = useContext(LayoutContext);
   const Comp = createLayoutComponent(layout);
   const props: { [key: string]: ReactNode } = {};
   Object.keys(layout).forEach(name => {
     props[name] = <DebugElement name={name} />;
   });
+  
   return (
-    <Comp
-      width={400}
-      height={400}
-      parent={<DebugElement name={"parent"} />}
-      {...props}
-    />
+    <ResizableBox  height={size.height} width={size.width} onResize={(event, { size, handle}) => {
+      setSize({width: size.width, height: size.height})
+    }}>
+      <Comp
+        width={size.width}
+        height={size.height}
+        parent={<DebugElement name={"parent"} />}
+        {...props}
+      />
+    </ResizableBox>
   );
 };
 
