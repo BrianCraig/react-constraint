@@ -1,8 +1,7 @@
-import React, { ReactElement, FunctionComponent } from "react";
+import React, { ReactElement } from "react";
 import { LayoutDefinition, Side, ComponentInstance } from "./definition";
 import { ParseLayout } from "./parser";
 import { ResolveConstraints } from "./constraint";
-import { findComponentByName } from "./util";
 
 export interface LayoutComponent {
   width: number;

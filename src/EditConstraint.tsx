@@ -2,8 +2,6 @@ import React, {
   useContext,
   FunctionComponent,
   useState,
-  SetStateAction,
-  Dispatch,
   SyntheticEvent
 } from "react";
 import Button from "@material-ui/core/Button";
@@ -64,6 +62,25 @@ const EditingConstraint: FunctionComponent<EditingConstraintinterface> = ({
       distance: parseInt((event.target as HTMLInputElement).value)
     }));
   };
+
+  const onComponentChange = (event: any) => {
+    event.persist();
+
+    setFinalConstraint(constraint => ({
+      ...constraint,
+      component: (event.target as HTMLInputElement).value
+    }));
+  };
+
+  const onSideChange = (event: any) => {
+    event.persist();
+
+    setFinalConstraint(constraint => ({
+      ...constraint,
+      toSide: (event.target.value as keyof typeof Side)
+    }));
+  };
+
   return (
     <>
       <DialogContent>
@@ -83,7 +100,8 @@ const EditingConstraint: FunctionComponent<EditingConstraintinterface> = ({
           margin="dense"
           id="component"
           labelId="component-label"
-          value={constraint.component}
+          value={finalConstraint.component}
+          onChange={onComponentChange}
           fullWidth
         >
           <MenuItem value="parent">parent</MenuItem>
@@ -96,7 +114,7 @@ const EditingConstraint: FunctionComponent<EditingConstraintinterface> = ({
         <InputLabel id="side-label" style={{ marginTop: 24 }}>
           To side
         </InputLabel>
-        <Select margin="dense" id="side" labelId="side-label" fullWidth>
+        <Select value={finalConstraint.toSide} onChange={onSideChange} margin="dense" id="side" labelId="side-label" fullWidth>
           <MenuItem value="top">Top</MenuItem>
           <MenuItem value="right">Right</MenuItem>
           <MenuItem value="bottom">Bottom</MenuItem>
@@ -147,7 +165,7 @@ export const EditConstraint = () => {
       <DialogTitle id="form-dialog-title">{`Changing ${editConstraint} constraint for ${selectedComponent}`}</DialogTitle>
       <EditingConstraint
         constraint={constraint}
-        components={Object.keys(layout)}
+        components={Object.keys(layout).filter((component => component !== selectedComponent))}
         close={close}
         save={(constraint: ConstraintDefinition) => {
           changeConstraint(constraint);

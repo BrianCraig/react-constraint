@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useContext } from "react";
 import { LayoutContext } from "./LayoutContext";
 import { DebugBorders } from "./DebugBorders";
-import { positions } from "@material-ui/system";
 
 interface DebugElementInterface {
   style?: { width: number; height: number; top: number; left: number };
@@ -15,7 +14,6 @@ export const DebugElement: FunctionComponent<DebugElementInterface> = ({
   const {
     setSelectedComponent,
     selectedComponent,
-    layout,
     setEditConstraint
   } = useContext(LayoutContext);
   const selected = selectedComponent === name;

@@ -24,7 +24,7 @@ export const ParseLayout = (
     }
   });
 
-  for (const [name, component] of Object.entries(layout)) {
+  for (const name of Object.keys(layout)) {
     components.push({ name, positions: {} });
   }
 
