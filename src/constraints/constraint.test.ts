@@ -1,5 +1,5 @@
 import { ResolveConstraint, ResolveConstraints } from "./constraint";
-import { ComponentInstance, Side, ConstraintInstance } from "./definition";
+import { ComponentInstance, Side, ConstraintInstance, WidthConstraint } from "./definition";
 
 const ParentComponent = (): ComponentInstance => ({
   name: "parent",
@@ -91,6 +91,36 @@ describe("constraint resolving tests", () => {
       [Side.top]: 10,
       [Side.right]: 90,
       [Side.bottom]: 90,
+      [Side.left]: 10
+    });
+  });
+
+  test("a simple width constraint", () => {
+    const testedComponent = NewComponent("nameX");
+    const parent = ParentComponent();
+    const constraintLeft: ConstraintInstance = {
+      fromInstance: testedComponent,
+      toInstance: parent,
+      resolved: Boolean(false),
+      fromSide: Side.left,
+      toSide: Side.left,
+      distance: 10
+    };
+
+    const widthConstraint: WidthConstraint = {
+      instance: testedComponent,
+      resolved: Boolean(false),
+      width: 80
+    };
+
+
+    ResolveConstraints([
+      constraintLeft,
+      widthConstraint
+    ]);
+
+    expect(testedComponent.positions).toStrictEqual({
+      [Side.right]: 90,
       [Side.left]: 10
     });
   });
