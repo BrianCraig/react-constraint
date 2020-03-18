@@ -10,6 +10,7 @@ import {
   LayoutDefinition,
   ConstraintDefinition
 } from "./constraints/definition";
+import { appLayout } from "./examples/appLayout";
 
 
 export interface LayoutContextInterface {
@@ -56,7 +57,7 @@ const defaultConstraints: ConstraintDefinition[] = [
 ];
 
 export const LayoutProvider: FunctionComponent = ({ children }) => {
-  const [layout, setLayout] = useState<LayoutDefinition>({});
+  const [layout, setLayout] = useState<LayoutDefinition>(appLayout);
   const [addingComponent, setAddingComponent] = useState<boolean>(false)
   const [selectedComponent, setSelectedComponent] = useState<string>("");
   const [editConstraint, setEditConstraint] = useState<string>("");

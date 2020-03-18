@@ -39,6 +39,20 @@ export const ParseLayout = (
         resolved: Boolean(false)
       })
     );
+    if(component.width !== undefined){
+      constraints.push({
+        instance: findComponentByName(components, name),
+        width: component.width,
+        resolved: Boolean(false)
+      })
+    }
+    if(component.height !== undefined){
+      constraints.push({
+        instance: findComponentByName(components, name),
+        height: component.height,
+        resolved: Boolean(false)
+      })
+    }
   }
 
   return [components, constraints];

@@ -1,4 +1,4 @@
-import { ConstraintInstance, ConstraintInstances, RelativeConstraintInstance, WidthConstraintInstance, Side } from "./definition";
+import { ConstraintInstance, ConstraintInstances, RelativeConstraintInstance, WidthConstraintInstance, Side, HeightConstraintInstance } from "./definition";
 
 const ResolveRelativeConstraint = (constraint: RelativeConstraintInstance): void => {
   const {
@@ -28,7 +28,24 @@ const ResolveWidthConstraint = (constraint: WidthConstraintInstance): void => {
     instance.positions[Side.right] = instance.positions[Side.left]! + width
     constraint.resolved = Boolean(true);
   } else if (instance.positions[Side.right] !== undefined) {
+    instance.positions[Side.left] = instance.positions[Side.right]! - width
+    constraint.resolved = Boolean(true);
+  };
+};
 
+
+const ResolveHeightConstraint = (constraint: HeightConstraintInstance): void => {
+  const {
+    instance,
+    height,
+    resolved
+  } = constraint;
+  if (resolved) return;
+  if (instance.positions[Side.top] !== undefined) {
+    instance.positions[Side.bottom] = instance.positions[Side.top]! + height
+    constraint.resolved = Boolean(true);
+  } else if (instance.positions[Side.bottom] !== undefined) {
+    instance.positions[Side.top] = instance.positions[Side.bottom]! - height
     constraint.resolved = Boolean(true);
   };
 };
@@ -41,6 +58,8 @@ export const ResolveConstraint = (constraint: ConstraintInstance): void => {
     ResolveRelativeConstraint(constraint as RelativeConstraintInstance)
   } else if (keys.includes("width")) {
     ResolveWidthConstraint(constraint as WidthConstraintInstance)
+  } else if (keys.includes("height")) {
+    ResolveHeightConstraint(constraint as HeightConstraintInstance)
   }
 };
 

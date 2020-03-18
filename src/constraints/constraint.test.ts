@@ -1,5 +1,5 @@
 import { ResolveConstraint, ResolveConstraints } from "./constraint";
-import { ComponentInstance, Side, ConstraintInstance, WidthConstraint } from "./definition";
+import { ComponentInstance, Side, ConstraintInstance, WidthConstraintInstance, HeightConstraintInstance, RelativeConstraintInstance } from "./definition";
 
 const ParentComponent = (): ComponentInstance => ({
   name: "parent",
@@ -107,12 +107,11 @@ describe("constraint resolving tests", () => {
       distance: 10
     };
 
-    const widthConstraint: WidthConstraint = {
+    const widthConstraint: WidthConstraintInstance = {
       instance: testedComponent,
       resolved: Boolean(false),
       width: 80
     };
-
 
     ResolveConstraints([
       constraintLeft,
@@ -122,6 +121,35 @@ describe("constraint resolving tests", () => {
     expect(testedComponent.positions).toStrictEqual({
       [Side.right]: 90,
       [Side.left]: 10
+    });
+  });
+
+  test("a simple height constraint", () => {
+    const testedComponent = NewComponent("nameX");
+    const parent = ParentComponent();
+    const constraintBottom: RelativeConstraintInstance = {
+      fromInstance: testedComponent,
+      toInstance: parent,
+      resolved: Boolean(false),
+      fromSide: Side.bottom,
+      toSide: Side.bottom,
+      distance: -25
+    };
+
+    const heightConstraint: HeightConstraintInstance = {
+      instance: testedComponent,
+      resolved: Boolean(false),
+      height: 40
+    };
+
+    ResolveConstraints([
+      constraintBottom,
+      heightConstraint
+    ]);
+
+    expect(testedComponent.positions).toStrictEqual({
+      [Side.bottom]: 75,
+      [Side.top]: 35
     });
   });
 });

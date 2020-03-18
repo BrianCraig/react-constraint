@@ -38,6 +38,12 @@ export interface WidthConstraintInstance {
   width: number;
 };
 
+export interface HeightConstraintInstance {
+  instance: ComponentInstance;
+  resolved: Boolean;
+  height: number;
+};
+
 export interface RelativeConstraintInstance {
   fromInstance: ComponentInstance;
   fromSide: Side;
@@ -47,6 +53,6 @@ export interface RelativeConstraintInstance {
   resolved: Boolean;
 }
 
-export type ConstraintInstance = RelativeConstraintInstance | WidthConstraintInstance
+export type ConstraintInstance = RelativeConstraintInstance | WidthConstraintInstance | HeightConstraintInstance
 
 export type ConstraintInstances = ConstraintInstance[];
