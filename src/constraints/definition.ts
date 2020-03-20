@@ -7,6 +7,7 @@ export enum Side {
   left = "left"
 }
 
+
 export interface ConstraintDefinition {
   component: string;
   fromSide: keyof typeof Side;
@@ -31,7 +32,19 @@ export interface ComponentInstance {
 
 export type ComponentInstances = ComponentInstance[];
 
-export interface ConstraintInstance {
+export interface WidthConstraintInstance {
+  instance: ComponentInstance;
+  resolved: Boolean;
+  width: number;
+};
+
+export interface HeightConstraintInstance {
+  instance: ComponentInstance;
+  resolved: Boolean;
+  height: number;
+};
+
+export interface RelativeConstraintInstance {
   fromInstance: ComponentInstance;
   fromSide: Side;
   toInstance: ComponentInstance;
@@ -39,5 +52,7 @@ export interface ConstraintInstance {
   distance: ConstraintSize;
   resolved: Boolean;
 }
+
+export type ConstraintInstance = RelativeConstraintInstance | WidthConstraintInstance | HeightConstraintInstance
 
 export type ConstraintInstances = ConstraintInstance[];
