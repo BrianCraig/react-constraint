@@ -9,7 +9,7 @@
     "name": "Brian Craig",
     "email": "briancraigok@gmail.com"
   },
-  "version": "0.0.2",
+  "version": "0.0.3",
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
