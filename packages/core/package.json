@@ -3,13 +3,13 @@
   "description": "React Constraint layout client",
   "repository": {
     "type": "git",
-    "url": "https://github.com/briancrig/react-constraint.git"
+    "url": "https://github.com/briancraig/react-constraint.git"
   },
   "author": {
     "name": "Brian Craig",
     "email": "briancraigok@gmail.com"
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
