@@ -32,7 +32,8 @@ export const createLayoutComponent = (
         width,
         height,
         top: positions[Side.top],
-        left: positions[Side.left]
+        left: positions[Side.left],
+        position: "absolute"
       },
       key: name
      });
