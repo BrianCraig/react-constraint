@@ -29,6 +29,7 @@ export const createLayoutComponent = (
     const height = (positions[Side.bottom] || 0) - (positions[Side.top] || 0);
     return React.cloneElement(components[name] as ReactElement, {
       style: {
+        ...((components[name] as ReactElement).props.style || {}),
         width,
         height,
         top: positions[Side.top],
