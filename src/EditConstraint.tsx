@@ -17,7 +17,7 @@ import {
   InputLabel,
   DialogContentText
 } from "@material-ui/core";
-import { ConstraintDefinition, Side } from "./constraints/definition";
+import { Definitions } from "react-constraint";
 
 const ParentModal = ({ close }: { close: () => any }) => (
   <Dialog open={true} onClose={close} aria-labelledby="form-dialog-title">
@@ -38,10 +38,10 @@ const ParentModal = ({ close }: { close: () => any }) => (
 );
 
 interface EditingConstraintinterface {
-  constraint: ConstraintDefinition;
+  constraint: Definitions.ConstraintDefinition;
   components: string[];
   close: () => any;
-  save: (constraint: ConstraintDefinition) => any;
+  save: (constraint: Definitions.ConstraintDefinition) => any;
 }
 
 const EditingConstraint: FunctionComponent<EditingConstraintinterface> = ({
@@ -50,7 +50,7 @@ const EditingConstraint: FunctionComponent<EditingConstraintinterface> = ({
   close,
   save
 }) => {
-  const [finalConstraint, setFinalConstraint] = useState<ConstraintDefinition>(
+  const [finalConstraint, setFinalConstraint] = useState<Definitions.ConstraintDefinition>(
     constraint
   );
 
@@ -77,7 +77,7 @@ const EditingConstraint: FunctionComponent<EditingConstraintinterface> = ({
 
     setFinalConstraint(constraint => ({
       ...constraint,
-      toSide: (event.target.value as keyof typeof Side)
+      toSide: (event.target.value as keyof typeof Definitions.Side)
     }));
   };
 
@@ -145,10 +145,10 @@ export const EditConstraint = () => {
   if (isOpen && !component) return <ParentModal close={close} />;
   if (!component) return null;
 
-  const defaultConstraint: ConstraintDefinition = {
+  const defaultConstraint: Definitions.ConstraintDefinition = {
     component: "parent",
-    fromSide: editConstraint as keyof typeof Side,
-    toSide: editConstraint as keyof typeof Side,
+    fromSide: editConstraint as keyof typeof Definitions.Side,
+    toSide: editConstraint as keyof typeof Definitions.Side,
     distance: 100
   };
 
@@ -156,7 +156,7 @@ export const EditConstraint = () => {
     constraint => constraint.fromSide === editConstraint
   );
 
-  const constraint: ConstraintDefinition = findConstraint
+  const constraint: Definitions.ConstraintDefinition = findConstraint
     ? findConstraint
     : defaultConstraint;
 
@@ -167,7 +167,7 @@ export const EditConstraint = () => {
         constraint={constraint}
         components={Object.keys(layout).filter((component => component !== selectedComponent))}
         close={close}
-        save={(constraint: ConstraintDefinition) => {
+        save={(constraint: Definitions.ConstraintDefinition) => {
           changeConstraint(constraint);
           close();
         }}

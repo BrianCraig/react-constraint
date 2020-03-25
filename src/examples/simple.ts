@@ -1,6 +1,6 @@
-import { LayoutDefinition } from "../constraints/definition";
+import { Definitions } from "react-constraint";
 
-export const simpleBlock: LayoutDefinition = {
+export const simpleBlock: Definitions.LayoutDefinition = {
   Block: {
     constraints: [
       {

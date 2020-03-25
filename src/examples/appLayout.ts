@@ -1,8 +1,8 @@
-import { LayoutDefinition } from "../constraints/definition";
+import { Definitions } from "react-constraint";
 
-export const appLayout: LayoutDefinition = {
+export const appLayout: Definitions.LayoutDefinition = {
   Sidebar: {
-    width:32*4,
+    width: 32 * 4,
     constraints: [
       {
         component: "parent",
@@ -15,7 +15,7 @@ export const appLayout: LayoutDefinition = {
         fromSide: "bottom",
         toSide: "bottom",
         distance: -32
-      },      
+      },
       {
         component: "parent",
         fromSide: "left",
@@ -25,14 +25,14 @@ export const appLayout: LayoutDefinition = {
     ]
   },
   Header: {
-    height:32*2,
+    height: 32 * 2,
     constraints: [
       {
         component: "parent",
         fromSide: "top",
         toSide: "top",
         distance: 32
-      },  
+      },
       {
         component: "Sidebar",
         fromSide: "left",
@@ -48,14 +48,14 @@ export const appLayout: LayoutDefinition = {
     ]
   },
   Footer: {
-    height:32,
+    height: 32,
     constraints: [
       {
         component: "parent",
         fromSide: "bottom",
         toSide: "bottom",
         distance: -32
-      },  
+      },
       {
         component: "Sidebar",
         fromSide: "left",
@@ -83,7 +83,7 @@ export const appLayout: LayoutDefinition = {
         fromSide: "bottom",
         toSide: "top",
         distance: -32
-      },  
+      },
       {
         component: "Sidebar",
         fromSide: "left",

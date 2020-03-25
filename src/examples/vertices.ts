@@ -1,6 +1,6 @@
-import { LayoutDefinition } from "../constraints/definition";
+import { Definitions } from "react-constraint";
 
-export const vertices: LayoutDefinition = {
+export const vertices: Definitions.LayoutDefinition = {
   Center: {
     constraints: [
       {

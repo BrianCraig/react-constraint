@@ -2,7 +2,7 @@ import React, { useContext, FunctionComponent, ReactNode, useState } from "react
 import { ResizableBox } from "react-resizable";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
-import { createLayoutComponent } from "./constraints/generator";
+import { createLayoutComponent } from "react-constraint";
 import { LayoutContext, LayoutProvider } from "./LayoutContext";
 import { DebugElement } from "./DebugComponent";
 import { EditConstraint } from "./EditConstraint";

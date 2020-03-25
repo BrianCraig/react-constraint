@@ -6,19 +6,16 @@ import React, {
   Dispatch,
   SetStateAction
 } from "react";
-import {
-  LayoutDefinition,
-  ConstraintDefinition
-} from "./constraints/definition";
+import {Definitions} from "react-constraint";
 import { appLayout } from "./examples/appLayout";
 
 
 export interface LayoutContextInterface {
-  layout: LayoutDefinition;
+  layout: Definitions.LayoutDefinition;
   addComponent: (name: string) => void;
   addingComponent: boolean;
   toggleAddingComponent: () => void;
-  changeConstraint: (constraint: ConstraintDefinition) => void;
+  changeConstraint: (constraint: Definitions.ConstraintDefinition) => void;
   selectedComponent: string;
   setSelectedComponent: Dispatch<SetStateAction<string>>;
   editConstraint: string;
@@ -29,7 +26,7 @@ export const LayoutContext: Context<LayoutContextInterface> = createContext(
   null as any
 );
 
-const defaultConstraints: ConstraintDefinition[] = [
+const defaultConstraints: Definitions.ConstraintDefinition[] = [
   {
     component: "parent",
     fromSide: "top",
@@ -57,7 +54,7 @@ const defaultConstraints: ConstraintDefinition[] = [
 ];
 
 export const LayoutProvider: FunctionComponent = ({ children }) => {
-  const [layout, setLayout] = useState<LayoutDefinition>(appLayout);
+  const [layout, setLayout] = useState<Definitions.LayoutDefinition>(appLayout);
   const [addingComponent, setAddingComponent] = useState<boolean>(false)
   const [selectedComponent, setSelectedComponent] = useState<string>("");
   const [editConstraint, setEditConstraint] = useState<string>("");
@@ -66,7 +63,7 @@ export const LayoutProvider: FunctionComponent = ({ children }) => {
       ...props,
       [name]: { constraints: defaultConstraints }
     }));
-  const changeConstraint = (constraint: ConstraintDefinition) =>
+  const changeConstraint = (constraint: Definitions.ConstraintDefinition) =>
     setLayout(layout => {
       const originalConstraints = layout[selectedComponent].constraints;
       const constraints = [
