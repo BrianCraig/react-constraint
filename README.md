@@ -4,5 +4,5 @@ React constraint is a package intended for Adding a Constraint based layout on R
 
 ### Documentation
 
-[Core](./src/constraints/readme.md)  
+[Core](./packages/core/readme.md)  
 [Changelog](./changelog.md)  

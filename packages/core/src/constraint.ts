@@ -1,4 +1,4 @@
-import { ConstraintInstance, ConstraintInstances, RelativeConstraintInstance, WidthConstraintInstance, Side, HeightConstraintInstance } from "./definition";
+  import { ConstraintInstance, ConstraintInstances, RelativeConstraintInstance, WidthConstraintInstance, Side, HeightConstraintInstance } from "./definition";
 
 const ResolveRelativeConstraint = (constraint: RelativeConstraintInstance): void => {
   const {
