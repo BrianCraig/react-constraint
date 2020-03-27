@@ -1,5 +1,9 @@
 # Constraint Core
 
+This is th core of react-constraint, for more general information go to [Main Documentation](../../README.md)  
+
+## Technical information
+
 Lets say you have the **LayoutDefinition** object, which contains the information about an entire view, this is used with **createLayoutComponent** to create the Component that will be showed in the client, this component requires _width_ and _height_ props to work; this is a Functional Component, so each re-render would basically compute everything again.
 
 Then with the **LayoutDefinition** we must generate **ComponentInstance**'s, with this we can generate all our **ConstraintInstance**'s.
