@@ -10,7 +10,7 @@ It is divided in the **Core** package, and the **Playground**, you can run the p
 ☑ Less Flexbox and Grid and more dynamic and atomic layout components.   
 ☑ It's just javascript, no css classes injected.  
 ☑ Easier to test with the playground.  
-☑ Adapts easily to Design changes ands definitons. 
+☑ Adapts easily to Design changes ands definitons.  
 ☑ Simpler for Web designers and developers.  
 
 ### Usage
