@@ -3,6 +3,7 @@ import { Definitions, createLayoutComponent } from 'react-constraint';
 import { useScreenSize } from '../hooks/useScreenSize';
 import { makeStyles } from '@material-ui/core';
 import { SidebarContainer } from './SidebarContainer';
+import { ConstraintViewerContainer } from './ConstraintViewerContainer';
 
 const AppContainerLayout: Definitions.LayoutDefinition = {
 	Sidebar: {
@@ -55,7 +56,7 @@ export const AppContainer = () => {
 			}
 			Main={
 				<div className={classes.main}>
-					<p>Header</p>
+					<ConstraintViewerContainer />
 				</div>
 			}
 		/>
