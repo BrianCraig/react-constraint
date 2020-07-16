@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 
-const lines = (color) =>`
+const lines = () =>`
   repeating-linear-gradient(
     180deg,
     rgba(0,0,0,0.3),
@@ -20,7 +20,7 @@ const lines = (color) =>`
 
 const useStyles = makeStyles((theme) => ({
 	parent: {
-    backgroundImage: lines("#fff"),
+    backgroundImage: lines(),
     width: 400,
     height: 600, 
     border: `4px dashed ${theme.palette.primary.light}`,
