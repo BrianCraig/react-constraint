@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, ButtonGroup, Button, Grid, Typography, TextField } from '@material-ui/core';
+import { makeStyles, ButtonGroup, Button, TextField } from '@material-ui/core';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import { Definitions, createLayoutComponent } from 'react-constraint';
