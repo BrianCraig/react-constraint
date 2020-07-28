@@ -55,9 +55,7 @@ export const AppContainer = () => {
 				</div>
 			}
 			Main={
-				<div className={classes.main}>
-					<ConstraintViewerContainer />
-				</div>
+				<ConstraintViewerContainer className={classes.main} />
 			}
 		/>
 	);

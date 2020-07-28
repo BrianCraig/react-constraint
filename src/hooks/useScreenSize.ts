@@ -23,7 +23,7 @@ const useEventListener = (eventName: string, handler: any, element = window) => 
 }
 
 export const useScreenSize = () => {
-  const [refresh, setRefresh] = useState(Math.random());
+  const [, setRefresh] = useState(Math.random());
 
   const handler = useCallback(() => {
     setRefresh(Math.random());
